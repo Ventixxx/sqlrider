@@ -1,27 +1,26 @@
-package dev.ventixxx.sqlrider.api;
+package dev.ventixxx.sqlrider;
 
-import dev.ventixxx.sqlrider.database.Database;
 import dev.ventixxx.sqlrider.database.DatabaseBuilder;
 import dev.ventixxx.sqlrider.database.DatabaseContext;
 import dev.ventixxx.sqlrider.database.DatabaseType;
+import dev.ventixxx.sqlrider.example.User;
 
 public final class SQLRider {
 
-    private String DBHost;
-    private String DBPort;
-    private String DBDatabase;
+    static DatabaseContext context;
 
-    public SQLRider(String DBHost, String DBPort, String DBDatabase) {
-        DatabaseContext context = new DatabaseBuilder()
+    public static void main(String[] args) {
+        context = new DatabaseBuilder()
                 .type(DatabaseType.MYSQL)
-                .host(DBHost)
-                .port(DBPort)
-                .database(DBDatabase)
+                .host("127.0.0.1")
+                .port("3306")
+                .username("root")
+                .password("root")
+                .database("minecraft")
                 .build();
-    }
 
-    public void migrate() {
-
+        assert context != null;
+        context.migrate(User.class);
     }
 
 }
