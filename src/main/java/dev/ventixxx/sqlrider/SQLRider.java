@@ -1,16 +1,27 @@
-package dev.ventixxx.sqlrider;
+package dev.ventixxx.sqlrider.api;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import dev.ventixxx.sqlrider.database.Database;
+import dev.ventixxx.sqlrider.database.DatabaseBuilder;
+import dev.ventixxx.sqlrider.database.DatabaseContext;
+import dev.ventixxx.sqlrider.database.DatabaseType;
 
-public final class SQLRider extends JavaPlugin {
+public final class SQLRider {
 
-    @Override
-    public void onEnable() {
+    private String DBHost;
+    private String DBPort;
+    private String DBDatabase;
+
+    public SQLRider(String DBHost, String DBPort, String DBDatabase) {
+        DatabaseContext context = new DatabaseBuilder()
+                .type(DatabaseType.MYSQL)
+                .host(DBHost)
+                .port(DBPort)
+                .database(DBDatabase)
+                .build();
+    }
+
+    public void migrate() {
 
     }
 
-    @Override
-    public void onDisable() {
-
-    }
 }
